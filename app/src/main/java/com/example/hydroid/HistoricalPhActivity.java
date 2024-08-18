@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
-public class HistoricalActivity extends AppCompatActivity {
+public class HistoricalPhActivity extends AppCompatActivity {
 
     Button ph_btn, historical_btn;
     ListView lv_data;
@@ -20,9 +20,9 @@ public class HistoricalActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.history_view);
+        setContentView(R.layout.ph_history_view);
 
-        HydroDataService dataService = new HydroDataService(HistoricalActivity.this);
+        HydroDataService dataService = new HydroDataService(HistoricalPhActivity.this);
 
         ph_btn = findViewById(R.id.curr_ph_btn);
         historical_btn = findViewById(R.id.historical_btn);
@@ -31,7 +31,7 @@ public class HistoricalActivity extends AppCompatActivity {
         lv_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                            @Override
                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                               Toast.makeText(HistoricalActivity.this, "item " + position + "clicked", Toast.LENGTH_SHORT).show();
+                                               Toast.makeText(HistoricalPhActivity.this, "item " + position + "clicked", Toast.LENGTH_SHORT).show();
                                            }
                                        });
 
@@ -41,12 +41,12 @@ public class HistoricalActivity extends AppCompatActivity {
                         dataService.getCurrPH(new HydroDataService.VolleyResponseListener() {
                             @Override
                             public void onError(String message) {
-                                Toast.makeText(HistoricalActivity.this, message, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(HistoricalPhActivity.this, message, Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
                             public void onResp(String resp) {
-                                Toast.makeText(HistoricalActivity.this, resp, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(HistoricalPhActivity.this, resp, Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -58,12 +58,12 @@ public class HistoricalActivity extends AppCompatActivity {
                 dataService.getEnvHistory(new HydroDataService.getEnvHistoryResponse() {
                     @Override
                     public void onError(String message) {
-                        Toast.makeText(HistoricalActivity.this, message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(HistoricalPhActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onResp(List<EnvironmentData> environmentDataList) {
-                        ArrayAdapter arrayAdapter = new ArrayAdapter(HistoricalActivity.this, android.R.layout.simple_list_item_1, environmentDataList);
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(HistoricalPhActivity.this, android.R.layout.simple_list_item_1, environmentDataList);
                         lv_data.setAdapter(arrayAdapter);
                     }
                 });

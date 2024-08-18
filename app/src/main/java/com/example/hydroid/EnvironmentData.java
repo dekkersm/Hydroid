@@ -1,5 +1,7 @@
 package com.example.hydroid;
 
+import androidx.annotation.NonNull;
+
 public class EnvironmentData {
     private float temperature;
     private float light_intensity;
@@ -18,6 +20,7 @@ public class EnvironmentData {
         this.baro = baro;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "temperature=" + temperature +
