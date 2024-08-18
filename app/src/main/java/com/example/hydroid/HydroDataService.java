@@ -12,6 +12,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HydroDataService {
 
     public static final String PH_URL = "https://petstore.swagger.io/v2/store/inventory";
@@ -54,15 +57,21 @@ public class HydroDataService {
         RequestSingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 
-    public void getEnvData(VolleyResponseListener volleyResponseListener){
+    public interface GetEnvDataResponse {
+        void onError(String message);
+        void onResp(List<EnvironmentData> environmentDataList);
+    }
+
+    public void getEnvData(GetEnvDataResponse getEnvDataResponse){
         String url = ENV_HISTORICAL_URL;
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        List<EnvironmentData> environmentDataList = new ArrayList<>();
+                        int s  = response.length();
                         for (int i = 0; i < response.length(); i++) {
-
                             try {
                                 JSONObject env = response.getJSONObject(i);
 
@@ -71,16 +80,19 @@ public class HydroDataService {
                                 environmentData.setLight_intensity(env.getLong("id"));
                                 environmentData.setHumidity(env.getInt("id"));
 
-                                volleyResponseListener.onResp(environmentData.toString());
+                                environmentDataList.add(environmentData);
+
                             } catch (JSONException e) {
                                 throw new RuntimeException(e);
                             }
                         }
+
+                        getEnvDataResponse.onResp(environmentDataList);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                volleyResponseListener.onError("didn't work");
+                getEnvDataResponse.onError("didn't work");
             }
         });
 
