@@ -55,7 +55,7 @@ public class HistoricalActivity extends AppCompatActivity {
         historical_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dataService.getEnvData(new HydroDataService.GetEnvDataResponse() {
+                dataService.getEnvHistory(new HydroDataService.getEnvHistoryResponse() {
                     @Override
                     public void onError(String message) {
                         Toast.makeText(HistoricalActivity.this, message, Toast.LENGTH_SHORT).show();

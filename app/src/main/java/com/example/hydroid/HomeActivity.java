@@ -20,11 +20,11 @@ public class HomeActivity extends AppCompatActivity {
         ph_btn = findViewById(R.id.ph_btn);
 
         ph_btn.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                  Intent i = new Intent(HomeActivity.this, HistoricalActivity.class);
-                  startActivity(i);
-              }
-          });
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomeActivity.this, HistoricalActivity.class);
+                startActivity(i);
+            }
+        });
     }
 }

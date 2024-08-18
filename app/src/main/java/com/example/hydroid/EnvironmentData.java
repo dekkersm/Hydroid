@@ -3,36 +3,28 @@ package com.example.hydroid;
 public class EnvironmentData {
     private float temperature;
     private float light_intensity;
-    private int humidity;
+    private float humidity;
+    private float co2;
+    private float baro;
 
     public EnvironmentData() {
     }
 
-    public EnvironmentData(float temperature, float light_intensity, int humidity) {
+    public EnvironmentData(float temperature, float light_intensity, float humidity, float co2, float baro) {
         this.temperature = temperature;
         this.light_intensity = light_intensity;
         this.humidity = humidity;
+        this.co2 = co2;
+        this.baro = baro;
     }
 
     @Override
     public String toString() {
-        return "EnvironmentData{" +
-                "temperature=" + temperature +
+        return "temperature=" + temperature +
                 ", light_intensity=" + light_intensity +
                 ", humidity=" + humidity +
-                '}';
-    }
-
-    public float getTemperature() {
-        return temperature;
-    }
-
-    public float getLight_intensity() {
-        return light_intensity;
-    }
-
-    public int getHumidity() {
-        return humidity;
+                ", co2=" + co2 +
+                ", baro=" + baro;
     }
 
     public void setTemperature(float temperature) {
@@ -43,7 +35,15 @@ public class EnvironmentData {
         this.light_intensity = light_intensity;
     }
 
-    public void setHumidity(int humidity) {
+    public void setHumidity(float humidity) {
         this.humidity = humidity;
+    }
+
+    public void setCo2(float co2) {
+        this.co2 = co2;
+    }
+
+    public void setBaro(float baro) {
+        this.baro = baro;
     }
 }
