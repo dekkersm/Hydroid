@@ -4,14 +4,14 @@ import androidx.annotation.NonNull;
 
 public class PhData {
     private float value;
-    private float date;
+    private long date;
     private boolean phUpOn;
     private boolean phDownOn;
 
     public PhData() {
     }
 
-    public PhData(float value, float date, boolean phUpOn, boolean phDownOn) {
+    public PhData(float value, long date, boolean phUpOn, boolean phDownOn) {
         this.value = value;
         this.date = date;
         this.phUpOn = phUpOn;
@@ -22,7 +22,7 @@ public class PhData {
     @Override
     public String toString() {
         return "value=" + value +
-                ", date=" + date +
+                ", date=" + DateUtils.getReadableDateFromLong((long) date) +
                 ", phUpOn=" + phUpOn +
                 ", phDownOn=" + phDownOn;
     }
@@ -31,7 +31,7 @@ public class PhData {
         return value;
     }
 
-    public float getDate() {
+    public long getDate() {
         return date;
     }
 
@@ -47,7 +47,7 @@ public class PhData {
         this.value = value;
     }
 
-    public void setDate(float date) {
+    public void setDate(long date) {
         this.date = date;
     }
 

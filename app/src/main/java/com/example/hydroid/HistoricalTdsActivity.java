@@ -55,15 +55,15 @@ public class HistoricalTdsActivity extends AppCompatActivity {
         historical_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dataService.getEnvHistory(new HydroDataService.getEnvHistoryResponse() {
+                dataService.getTdsHistory(new HydroDataService.getTdsHistoryResponse() {
                     @Override
                     public void onError(String message) {
                         Toast.makeText(HistoricalTdsActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onResp(List<EnvironmentData> environmentDataList) {
-                        ArrayAdapter arrayAdapter = new ArrayAdapter(HistoricalTdsActivity.this, android.R.layout.simple_list_item_1, environmentDataList);
+                    public void onResp(List<TdsData> TdsData) {
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(HistoricalTdsActivity.this, android.R.layout.simple_list_item_1, TdsData);
                         lv_data.setAdapter(arrayAdapter);
                     }
                 });

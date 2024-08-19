@@ -4,14 +4,14 @@ import androidx.annotation.NonNull;
 
 public class WaterData {
     private float tempValue;
-    private float date;
+    private long date;
     private boolean fillOn;
     private boolean pumpOn;
 
     public WaterData() {
     }
 
-    public WaterData(boolean pumpOn, boolean fillOn, float date, float tempValue) {
+    public WaterData(boolean pumpOn, boolean fillOn, long date, float tempValue) {
         this.pumpOn = pumpOn;
         this.fillOn = fillOn;
         this.date = date;
@@ -31,7 +31,7 @@ public class WaterData {
         return tempValue;
     }
 
-    public float getDate() {
+    public long getDate() {
         return date;
     }
 
@@ -47,7 +47,7 @@ public class WaterData {
         this.tempValue = tempValue;
     }
 
-    public void setDate(float date) {
+    public void setDate(long date) {
         this.date = date;
     }
 

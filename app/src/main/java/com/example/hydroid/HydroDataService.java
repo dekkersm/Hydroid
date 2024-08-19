@@ -18,7 +18,7 @@ import java.util.List;
 
 public class HydroDataService {
 
-    public static final String SERVER_IP = "192.168.237.103";
+    public static final String SERVER_IP = "192.168.1.127";
     public static final String PH_URL = "http://" + SERVER_IP + ":3000/ph/";
     public static final String TDS_URL = "http://" + SERVER_IP + ":3000/tds/";
     public static final String WATER_URL = "http://" + SERVER_IP + ":3000/water/";
@@ -142,9 +142,102 @@ public class HydroDataService {
         RequestSingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 
+    public interface getPhHistoryResponse {
+        void onError(String message);
+        void onResp(List<PhData> PhData);
+    }
+    public interface getTdsHistoryResponse {
+        void onError(String message);
+        void onResp(List<TdsData> TdsData);
+    }
     public interface getEnvHistoryResponse {
         void onError(String message);
         void onResp(List<EnvironmentData> environmentDataList);
+    }
+
+    public void getPhHistory(getPhHistoryResponse getPhHistoryResponse){
+        String url = PH_URL + "history";
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        List<PhData> phDataArrayList = new ArrayList<>();
+                        try {
+                            JSONArray phDataList = response.getJSONArray("phData");
+
+                            for (int i = 0; i < phDataList.length(); i++) {
+                                try {
+                                    JSONObject ph = phDataList.getJSONObject(i);
+
+                                    PhData phData = new PhData();
+                                    phData.setValue(ph.getLong("value"));
+                                    phData.setDate(ph.getLong("date"));
+                                    phData.setPhDownOn(ph.getBoolean("phUpOn"));
+                                    phData.setPhUpOn(ph.getBoolean("phDownOn"));
+
+                                    phDataArrayList.add(phData);
+
+                                } catch (JSONException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                            getPhHistoryResponse.onResp(phDataArrayList);
+
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                getPhHistoryResponse.onError("didn't work");
+            }
+        });
+
+        RequestSingleton.getInstance(context).addToRequestQueue(request);
+    }
+
+    public void getTdsHistory(getTdsHistoryResponse getTdsHistoryResponse){
+        String url = TDS_URL + "history";
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        List<TdsData> tdsDataList = new ArrayList<>();
+                        try {
+                            JSONArray tdsDataArray = response.getJSONArray("tdsData");
+
+                            for (int i = 0; i < tdsDataArray.length(); i++) {
+                                try {
+                                    JSONObject tds = tdsDataArray.getJSONObject(i);
+
+                                    TdsData tdsData = new TdsData();
+                                    tdsData.setValue(tds.getLong("value"));
+                                    tdsData.setDate(tds.getLong("date"));
+                                    tdsData.setPumpOn(tds.getBoolean("pumpOn"));
+
+                                    tdsDataList.add(tdsData);
+
+                                } catch (JSONException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                            getTdsHistoryResponse.onResp(tdsDataList);
+
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                getTdsHistoryResponse.onError("didn't work");
+            }
+        });
+
+        RequestSingleton.getInstance(context).addToRequestQueue(request);
     }
 
     public void getEnvHistory(getEnvHistoryResponse getEnvHistoryResponse){

@@ -55,16 +55,17 @@ public class HistoricalPhActivity extends AppCompatActivity {
         historical_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dataService.getEnvHistory(new HydroDataService.getEnvHistoryResponse() {
+                dataService.getPhHistory(new HydroDataService.getPhHistoryResponse() {
                     @Override
                     public void onError(String message) {
                         Toast.makeText(HistoricalPhActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onResp(List<EnvironmentData> environmentDataList) {
-                        ArrayAdapter arrayAdapter = new ArrayAdapter(HistoricalPhActivity.this, android.R.layout.simple_list_item_1, environmentDataList);
+                    public void onResp(List<PhData> PhData) {
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(HistoricalPhActivity.this, android.R.layout.simple_list_item_1, PhData);
                         lv_data.setAdapter(arrayAdapter);
+
                     }
                 });
             }

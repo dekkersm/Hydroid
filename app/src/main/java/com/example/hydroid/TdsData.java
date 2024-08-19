@@ -4,13 +4,13 @@ import androidx.annotation.NonNull;
 
 public class TdsData {
     private float value;
-    private float date;
+    private long date;
     private boolean pumpOn;
 
     public TdsData() {
     }
 
-    public TdsData(float value, float date, boolean pumpOn) {
+    public TdsData(float value, long date, boolean pumpOn) {
         this.value = value;
         this.date = date;
         this.pumpOn = pumpOn;
@@ -20,7 +20,7 @@ public class TdsData {
     @Override
     public String toString() {
         return "value=" + value +
-                ", date=" + date +
+                ", date=" + DateUtils.getReadableDateFromLong((long) date) +
                 ", pumpOn=" + pumpOn;
     }
 
@@ -28,7 +28,7 @@ public class TdsData {
         return value;
     }
 
-    public float getDate() {
+    public long getDate() {
         return date;
     }
 
@@ -40,7 +40,7 @@ public class TdsData {
         this.value = value;
     }
 
-    public void setDate(float date) {
+    public void setDate(long date) {
         this.date = date;
     }
 
