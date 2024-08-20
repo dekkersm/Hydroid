@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    android:background="@drawable/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2"
+        android:rowCount="4"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ph_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="17dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:text="pH"
+                        android:textColor="@color/DarkBlue"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ph_icon"
+                        android:layout_margin="10dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/ph_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/DarkGreen"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ec_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="17dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_row="0"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:text="Ec"
+                        android:textColor="@color/DarkBlue"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ec_icon"
+                        android:layout_margin="10dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/ec_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/DarkGreen"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/water_temp_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="17dp"
+            android:backgroundTint="@color/lightTeal"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:text="water temp"
+                        android:textColor="@color/DarkBlue"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/water_temp_icon"
+                        android:layout_margin="10dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/water_temp_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/teal"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/temp_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="17dp"
+            android:backgroundTint="@color/lightTeal"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_row="1"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:text="Air temp"
+                        android:textColor="@color/DarkBlue"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/air_temp_icon"
+                        android:layout_margin="10dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/temp_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/teal"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/humidity_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="17dp"
+            android:backgroundTint="@color/lightTeal"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_row="2"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:text="humidity"
+                        android:textColor="@color/DarkBlue"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/humidity_icon"
+                        android:layout_margin="10dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/humidity_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/teal"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/light_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="17dp"
+            android:backgroundTint="@color/lightTeal"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_row="2"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:text="light"
+                        android:textColor="@color/DarkBlue"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/light_icon"
+                        android:layout_margin="10dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/light_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/teal"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/co2_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="17dp"
+            android:backgroundTint="@color/lightTeal"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_row="3"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:text="Co2"
+                        android:textColor="@color/DarkBlue"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/co2_icon"
+                        android:layout_margin="10dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/co2_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/teal"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/baro_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="17dp"
+            android:backgroundTint="@color/lightTeal"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_row="3"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:text="Baro"
+                        android:textColor="@color/DarkBlue"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/pressure_icon"
+                        android:layout_margin="10dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/baro_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/teal"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </GridLayout>
+</RelativeLayout>
