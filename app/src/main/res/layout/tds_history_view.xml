@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:background="@drawable/login_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/curr_tds_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/white"
+            android:padding="18dp"
+            android:text="current tds"
+            android:textColor="@color/purple"
+            android:textSize="20sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="historical tds"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/purple"
+            android:padding="18dp"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"
+            android:id="@+id/historical_btn"/>
+
+        <ListView
+            android:id="@+id/list_historical"
+            android:layout_width="match_parent"
+            android:layout_height="517dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
