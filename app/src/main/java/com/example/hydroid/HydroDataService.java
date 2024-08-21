@@ -148,7 +148,7 @@ public class HydroDataService {
     }
     public interface getTdsHistoryResponse {
         void onError(String message);
-        void onResp(List<TdsData> TdsData);
+        void onResp(List<TdsData> tdsData);
     }
     public interface getEnvHistoryResponse {
         void onError(String message);

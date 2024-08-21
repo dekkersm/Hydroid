@@ -3,14 +3,14 @@ package com.example.hydroid;
 import androidx.annotation.NonNull;
 
 public class TdsData {
-    private float value;
+    private long value;
     private long date;
     private boolean pumpOn;
 
     public TdsData() {
     }
 
-    public TdsData(float value, long date, boolean pumpOn) {
+    public TdsData(long value, long date, boolean pumpOn) {
         this.value = value;
         this.date = date;
         this.pumpOn = pumpOn;
@@ -24,7 +24,7 @@ public class TdsData {
                 ", pumpOn=" + pumpOn;
     }
 
-    public float getValue() {
+    public long getValue() {
         return value;
     }
 
@@ -36,7 +36,7 @@ public class TdsData {
         return pumpOn;
     }
 
-    public void setValue(float value) {
+    public void setValue(long value) {
         this.value = value;
     }
 
