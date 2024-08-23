@@ -67,6 +67,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:text="Min Value:"
+                android:textColor="@color/DarkBlue"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/ph_min_config"
                 android:layout_width="203dp"
@@ -77,7 +87,19 @@
                 android:hint="Min Value"
                 android:inputType="numberDecimal"
                 android:padding="5dp"
-                android:paddingHorizontal="10dp" />
+                android:paddingHorizontal="10dp"
+                android:labelFor="@+id/ph_min_config"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:text="Max Value:"
+                android:textColor="@color/DarkBlue"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:labelFor="@+id/ph_max_config"/>
 
             <EditText
                 android:id="@+id/ph_max_config"

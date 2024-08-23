@@ -1,13 +1,8 @@
 package com.example.hydroid;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +21,6 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -87,7 +81,9 @@ public class AnalyticsActivity extends AppCompatActivity {
                         series.setDrawDataPoints(true);
                         graphView.addSeries(series);
                         graphView.getGridLabelRenderer().setGridStyle( GridLabelRenderer.GridStyle.HORIZONTAL );
-                        graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(AnalyticsActivity.this));
+                        graphView.getGridLabelRenderer().setLabelFormatter(
+                                new DateAsXAxisLabelFormatter(AnalyticsActivity.this,
+                                        new SimpleDateFormat("dd.MM.yy", Locale.getDefault())));
                     }
                 }, startDate, endDate);
             }
