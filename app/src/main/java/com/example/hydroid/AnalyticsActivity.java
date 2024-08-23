@@ -21,6 +21,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -86,6 +87,7 @@ public class AnalyticsActivity extends AppCompatActivity {
                         series.setDrawDataPoints(true);
                         graphView.addSeries(series);
                         graphView.getGridLabelRenderer().setGridStyle( GridLabelRenderer.GridStyle.HORIZONTAL );
+                        graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(AnalyticsActivity.this));
                     }
                 }, startDate, endDate);
             }

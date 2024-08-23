@@ -23,6 +23,7 @@ public class HydroDataService {
     public static final String TDS_URL = "http://" + SERVER_IP + ":3000/tds/";
     public static final String WATER_URL = "http://" + SERVER_IP + ":3000/water/";
     public static final String ENV_URL = "http://" + SERVER_IP + ":3000/env/";
+    public static final String CONFIG_URL = "http://" + SERVER_IP + ":3000/config/";
     Context context;
 
     public HydroDataService(Context context) {
@@ -100,6 +101,54 @@ public class HydroDataService {
             @Override
             public void onErrorResponse(VolleyError error) {
                 volleyResponseListener.onError("didn't work");
+            }
+        });
+
+        RequestSingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+    }
+
+    public interface GetCurrConfigResp {
+        void onError(String message);
+        void onResp(JSONArray resp);
+    }
+
+    public void getCurrConfig(GetCurrConfigResp getCurrConfigResp){
+        String url = CONFIG_URL + "current";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray tempValue = response.getJSONArray("confData");
+                            getCurrConfigResp.onResp(tempValue);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                getCurrConfigResp.onError("didn't work");
+            }
+        });
+
+        RequestSingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+    }
+
+    public void setCurrConfig(String type, float value){
+        String url = CONFIG_URL + type + "?value=" + value +"&pumpTime=" + 1 + "&recheckTimeout=" + 2;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
             }
         });
 
