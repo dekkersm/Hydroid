@@ -42,4 +42,5 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("com.jjoe64:graphview:4.2.2")
+    implementation("com.google.android.material:material:1.9.0")
 }

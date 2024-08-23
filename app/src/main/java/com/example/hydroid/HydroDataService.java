@@ -198,8 +198,8 @@ public class HydroDataService {
         RequestSingleton.getInstance(context).addToRequestQueue(request);
     }
 
-    public void getTdsHistory(getTdsHistoryResponse getTdsHistoryResponse){
-        String url = TDS_URL + "history";
+    public void getTdsHistory(getTdsHistoryResponse getTdsHistoryResponse, long startDate, long endDate){
+        String url = TDS_URL + "history?from="+startDate+"&to="+endDate;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
