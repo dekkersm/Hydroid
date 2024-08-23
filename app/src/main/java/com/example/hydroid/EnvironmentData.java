@@ -30,6 +30,26 @@ public class EnvironmentData {
                 ", baro=" + baro;
     }
 
+    public float getTemperature() {
+        return temperature;
+    }
+
+    public float getLight_intensity() {
+        return light_intensity;
+    }
+
+    public float getHumidity() {
+        return humidity;
+    }
+
+    public float getCo2() {
+        return co2;
+    }
+
+    public float getBaro() {
+        return baro;
+    }
+
     public void setTemperature(float temperature) {
         this.temperature = temperature;
     }

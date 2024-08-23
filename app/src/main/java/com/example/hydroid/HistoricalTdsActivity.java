@@ -66,7 +66,7 @@ public class HistoricalTdsActivity extends AppCompatActivity {
                         ArrayAdapter arrayAdapter = new ArrayAdapter(HistoricalTdsActivity.this, android.R.layout.simple_list_item_1, TdsData);
                         lv_data.setAdapter(arrayAdapter);
                     }
-                });
+                }, 1, 1);
             }
         });
     }

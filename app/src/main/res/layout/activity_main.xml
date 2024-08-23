@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background"
+    android:background="@color/DarkBlue"
     android:gravity="center"
-    android:padding="16dp"
+    android:padding="40dp"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -15,9 +15,9 @@
         android:gravity="center"
         android:orientation="vertical">
         <ImageView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:src="@drawable/icon_account_circle"/>
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/logo"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:layout_marginTop="32dp"
             android:hint="Username"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/DarkBlueMuted"
             android:textSize="20sp"
             android:background="@drawable/rounded_corner"
             android:padding="18dp"
@@ -38,7 +38,7 @@
             android:layout_marginTop="16dp"
             android:hint="Password"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/DarkBlueMuted"
             android:textSize="20sp"
             android:background="@drawable/rounded_corner"
             android:padding="18dp"
@@ -49,8 +49,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="login"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/purple"
+            android:backgroundTint="@color/teal"
+            android:textColor="@color/white"
             android:padding="18dp"
             android:layout_marginTop="32dp"
             android:textSize="20sp"
@@ -59,9 +59,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="not yet registered? signUp now"
+            android:text="not yet registered? sign up now"
             android:textSize="18sp"
-            android:textColor="@color/purple"
+            android:textColor="@color/LightGreen"
             android:layout_marginTop="32dp"/>
 
     </LinearLayout>

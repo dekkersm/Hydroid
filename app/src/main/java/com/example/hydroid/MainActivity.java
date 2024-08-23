@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 if (username.getText().toString().equals("user") &&
                 password.getText().toString().equals("123")){
                     Toast.makeText(MainActivity.this, "Login Successful ", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(MainActivity.this, HomeActivity.class);
+                    Intent i = new Intent(MainActivity.this, HomePage.class);
                     i.putExtra("username", username.getText().toString());
                     startActivity(i);
                 }
