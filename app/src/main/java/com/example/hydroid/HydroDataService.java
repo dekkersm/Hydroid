@@ -13,17 +13,24 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class HydroDataService {
 
     public static final String SERVER_IP = "192.168.1.127";
-    public static final String PH_URL = "http://" + SERVER_IP + ":3000/ph/";
-    public static final String TDS_URL = "http://" + SERVER_IP + ":3000/tds/";
-    public static final String WATER_URL = "http://" + SERVER_IP + ":3000/water/";
-    public static final String ENV_URL = "http://" + SERVER_IP + ":3000/env/";
-    public static final String CONFIG_URL = "http://" + SERVER_IP + ":3000/config/";
+    public static final String BASE_URL = "http://" + SERVER_IP + ":5000/";
+
+    public static final String PH_URL = BASE_URL+ "ph/";
+    public static final String TDS_URL = BASE_URL + "tds/";
+    public static final String WATER_URL = BASE_URL + "water/";
+    public static final String ENV_URL = BASE_URL + "env/";
+    public static final String CONFIG_URL = BASE_URL + "config/";
     Context context;
 
     public HydroDataService(Context context) {
@@ -248,7 +255,12 @@ public class HydroDataService {
     }
 
     public void getTdsHistory(getTdsHistoryResponse getTdsHistoryResponse, long startDate, long endDate){
-        String url = TDS_URL + "history?from="+startDate+"&to="+endDate;
+        Date startdate = new Date(startDate);
+        Date enddate = new Date(endDate);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        String formattedStartDate = dateFormat.format(startdate);
+        String formattedEndDate = dateFormat.format(enddate);
+        String url = TDS_URL + "history?from="+formattedStartDate+"&to="+formattedEndDate;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -264,7 +276,7 @@ public class HydroDataService {
 
                                     TdsData tdsData = new TdsData();
                                     tdsData.setValue(tds.getLong("value"));
-                                    tdsData.setDate(tds.getLong("date"));
+                                    tdsData.setDate(Instant.parse(tds.getString("createdAt")).toEpochMilli());
                                     tdsData.setPumpOn(tds.getBoolean("pumpOn"));
 
                                     tdsDataList.add(tdsData);

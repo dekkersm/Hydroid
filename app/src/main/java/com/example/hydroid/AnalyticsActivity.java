@@ -69,10 +69,10 @@ public class AnalyticsActivity extends AppCompatActivity {
                     @Override
                     public void onResp(List<TdsData> tdsData) {
                         // traverse through all dates
-                        DataPoint[] points = new DataPoint[tdsData.size()];
+                       DataPoint[] points = new DataPoint[tdsData.size()];
                         for (int i = 0; i < tdsData.size(); i++) {
-                            Date date = new Date(tdsData.get(tdsData.size()-i-1).getDate());
-                            points[i] = new DataPoint(date, (double) tdsData.get(tdsData.size()-i-1).getValue());
+                            Date date = new Date(tdsData.get(i).getDate());
+                            points[i] = new DataPoint(date, (double) tdsData.get(i).getValue());
                         }
 
                         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(points);
