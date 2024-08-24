@@ -1,14 +1,20 @@
 package com.example.hydroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.renderscript.Sampler;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -26,6 +32,10 @@ public class ConfigurationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_configuration);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ec_v_btn = findViewById(R.id.ec_v_btn);
         ph_v_btn = findViewById(R.id.ph_v_btn);
@@ -45,9 +55,9 @@ public class ConfigurationActivity extends AppCompatActivity {
             @Override
             public void onResp(JSONArray resp) {
                 try {
-                    ph_max_config.setText(resp.getJSONObject(0).getString("value"));
+                    ec_config.setText(resp.getJSONObject(0).getString("value"));
                     ph_min_config.setText(resp.getJSONObject(1).getString("value"));
-                    ec_config.setText(resp.getJSONObject(2).getString("value"));
+                    ph_max_config.setText(resp.getJSONObject(2).getString("value"));
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
