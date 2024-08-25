@@ -43,6 +43,8 @@ public class AnalyticsActivity extends AppCompatActivity {
 
     Long startDate, endDate;
 
+    HydroDataService dataService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +54,7 @@ public class AnalyticsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        HydroDataService dataService = new HydroDataService(AnalyticsActivity.this);
-        //initDatePicker();
+        dataService = new HydroDataService(AnalyticsActivity.this);
 
         graphView = findViewById(R.id.idGraphView);
         header_title = findViewById(R.id.header_title);
@@ -64,38 +65,45 @@ public class AnalyticsActivity extends AppCompatActivity {
         go_btn = findViewById(R.id.go_btn);
 
 
+        Intent mIntent = getIntent();
+        header_title.setText(mIntent.getStringExtra("header_title"));
+        curr_value.setText(mIntent.getStringExtra("curr_value"));
+        header_img.setImageDrawable(getResources().getDrawable(mIntent.getIntExtra("header_img", R.drawable.ec_icon), getApplicationContext().getTheme()));
+
         from_text.setOnClickListener(view -> DatePickerdialog());
         to_text.setOnClickListener(view -> DatePickerdialog());
 
         go_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dataService.getTdsHistory(new HydroDataService.getTdsHistoryResponse() {
-                    @Override
-                    public void onError(String message) {
-                        Toast.makeText(AnalyticsActivity.this, message, Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onResp(List<TdsData> tdsData) {
-                        // traverse through all dates
-                       DataPoint[] points = new DataPoint[tdsData.size()];
-                        for (int i = 0; i < tdsData.size(); i++) {
-                            Date date = new Date(tdsData.get(i).getDate());
-                            points[i] = new DataPoint(date, (double) tdsData.get(i).getValue());
-                        }
-
-                        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(points);
-                        series.setColor(R.color.DarkBlue);
-                        series.setAnimated(true);
-                        series.setDrawDataPoints(true);
-                        graphView.addSeries(series);
-                        graphView.getGridLabelRenderer().setGridStyle( GridLabelRenderer.GridStyle.HORIZONTAL );
-                        graphView.getGridLabelRenderer().setLabelFormatter(
-                                new DateAsXAxisLabelFormatter(AnalyticsActivity.this,
-                                        new SimpleDateFormat("dd.MM.yy", Locale.getDefault())));
-                    }
-                }, startDate, endDate);
+                switch (header_title.getText().toString())
+                {
+                    case "pH":
+                        phClickListener();
+                        break;
+                    case "Ec":
+                        tdsClickListener();
+                        break;
+                    case "Water temp":
+                        waterClickListener();
+                        break;
+                    case "Temp":
+                        envClickListener("Temp");
+                        break;
+                    case "Humidity":
+                        envClickListener("Humidity");
+                        break;
+                    case "Light":
+                        envClickListener("Light");
+                        break;
+                    case "Co2":
+                        envClickListener("Co2");
+                        break;
+                    case "Baro":
+                        envClickListener("Baro");
+                        break;
+                    default: break;
+                }
             }
         });
     }
@@ -125,6 +133,119 @@ public class AnalyticsActivity extends AppCompatActivity {
 
         // Showing the date picker dialog
         datePicker.show(getSupportFragmentManager(), "DATE_PICKER");
+    }
+
+    private void phClickListener() {
+        dataService.getPhHistory(new HydroDataService.getPhHistoryResponse() {
+            @Override
+            public void onError(String message) {
+                Toast.makeText(AnalyticsActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResp(List<PhData> PhData) {
+                // traverse through all dates
+                DataPoint[] points = new DataPoint[PhData.size()];
+                for (int i = 0; i < PhData.size(); i++) {
+                    Date date = new Date(PhData.get(i).getDate());
+                    points[i] = new DataPoint(date, (double) PhData.get(i).getValue());
+                }
+                drawGraph(points);
+
+            }
+        }, startDate, endDate);
+    }
+
+    private void tdsClickListener() {
+        dataService.getTdsHistory(new HydroDataService.getTdsHistoryResponse() {
+            @Override
+            public void onError(String message) {
+                Toast.makeText(AnalyticsActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResp(List<TdsData> tdsData) {
+                // traverse through all dates
+                DataPoint[] points = new DataPoint[tdsData.size()];
+                for (int i = 0; i < tdsData.size(); i++) {
+                    Date date = new Date(tdsData.get(i).getDate());
+                    points[i] = new DataPoint(date, (double) tdsData.get(i).getValue());
+                }
+                drawGraph(points);
+            }
+        }, startDate, endDate);
+    }
+
+    private void waterClickListener() {
+        dataService.getWaterHistory(new HydroDataService.getWaterHistoryResponse() {
+            @Override
+            public void onError(String message) {
+                Toast.makeText(AnalyticsActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResp(List<WaterData> waterData) {
+                // traverse through all dates
+                DataPoint[] points = new DataPoint[waterData.size()];
+                for (int i = 0; i < waterData.size(); i++) {
+                    Date date = new Date(waterData.get(i).getDate());
+                    points[i] = new DataPoint(date, waterData.get(i).getTempValue());
+                }
+                drawGraph(points);
+
+            }
+        }, startDate, endDate);
+    }
+
+    private void envClickListener(String title){
+        dataService.getEnvHistory(new HydroDataService.getEnvHistoryResponse() {
+            @Override
+            public void onError(String message) {
+                Toast.makeText(AnalyticsActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResp(List<EnvironmentData> environmentDataList) {
+                // traverse through all dates
+                DataPoint[] points = new DataPoint[environmentDataList.size()];
+                for (int i = 0; i < environmentDataList.size(); i++) {
+                    Date date = new Date(environmentDataList.get(i).getDate());
+                    switch (title)
+                    {
+                        case "Temp":
+                            points[i] = new DataPoint(date, environmentDataList.get(i).getTemperature());
+                            break;
+                        case "Humidity":
+                            points[i] = new DataPoint(date, environmentDataList.get(i).getHumidity());
+                            break;
+                        case "Light":
+                            points[i] = new DataPoint(date, environmentDataList.get(i).getLight_intensity());
+                            break;
+                        case "Co2":
+                            points[i] = new DataPoint(date, environmentDataList.get(i).getCo2());
+                            break;
+                        case "Baro":
+                            points[i] = new DataPoint(date, environmentDataList.get(i).getBaro());
+                            break;
+                    }
+                }
+
+                drawGraph(points);
+            }
+        }, startDate, endDate);
+    }
+
+    private void drawGraph(DataPoint[] points){
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(points);
+        series.setColor(R.color.DarkBlue);
+        series.setAnimated(true);
+        series.setDrawDataPoints(true);
+        graphView.removeAllSeries();
+        graphView.addSeries(series);
+        graphView.getGridLabelRenderer().setGridStyle( GridLabelRenderer.GridStyle.HORIZONTAL );
+        graphView.getGridLabelRenderer().setLabelFormatter(
+                new DateAsXAxisLabelFormatter(AnalyticsActivity.this,
+                        new SimpleDateFormat("dd.MM.yy", Locale.getDefault())));
     }
 
 

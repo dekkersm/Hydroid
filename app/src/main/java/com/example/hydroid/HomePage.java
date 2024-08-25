@@ -124,25 +124,37 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.ph_btn) {
-            Intent i = new Intent(HomePage.this, AnalyticsActivity.class);
-            startActivity(i);
+            startAnalytics("pH", ph_value.getText(), R.drawable.ph_icon);
         }
         else if (v.getId() == R.id.ec_btn) {
-            Intent i = new Intent(HomePage.this, AnalyticsActivity.class);
-            startActivity(i);
+            startAnalytics("Ec", ec_value.getText(), R.drawable.ec_icon);
         }
         else if (v.getId() == R.id.water_temp_btn) {
+            startAnalytics("Water temp", water_temp_value.getText(), R.drawable.water_temp_icon);
         }
         else if (v.getId() == R.id.temp_btn) {
+            startAnalytics("Temp", temp_value.getText(), R.drawable.air_temp_icon);
         }
         else if (v.getId() == R.id.humidity_btn) {
+            startAnalytics("Humidity", humidity_value.getText(), R.drawable.humidity_icon);
         }
         else if (v.getId() == R.id.light_btn) {
+            startAnalytics("Light", light_value.getText(), R.drawable.light_icon);
         }
         else if (v.getId() == R.id.co2_btn) {
+            startAnalytics("Co2", co2_value.getText(), R.drawable.co2_icon);
         }
         else if (v.getId() == R.id.baro_btn) {
+            startAnalytics("Baro", baro_value.getText(), R.drawable.pressure_icon);
         }
+    }
+
+    private void startAnalytics(String title, CharSequence value, int img){
+        Intent i = new Intent(HomePage.this, AnalyticsActivity.class);
+        i.putExtra("header_title", title);
+        i.putExtra("curr_value", value);
+        i.putExtra("header_img", img);
+        startActivity(i);
     }
 
     @Override

@@ -109,7 +109,7 @@
 
         <TextView
             android:id="@+id/from_text"
-            android:layout_width="91dp"
+            android:layout_width="102dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:background="@color/white"

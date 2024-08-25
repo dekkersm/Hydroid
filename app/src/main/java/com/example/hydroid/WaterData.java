@@ -3,7 +3,7 @@ package com.example.hydroid;
 import androidx.annotation.NonNull;
 
 public class WaterData {
-    private float tempValue;
+    private double tempValue;
     private long date;
     private boolean fillOn;
     private boolean pumpOn;
@@ -11,7 +11,7 @@ public class WaterData {
     public WaterData() {
     }
 
-    public WaterData(boolean pumpOn, boolean fillOn, long date, float tempValue) {
+    public WaterData(boolean pumpOn, boolean fillOn, long date, double tempValue) {
         this.pumpOn = pumpOn;
         this.fillOn = fillOn;
         this.date = date;
@@ -27,7 +27,7 @@ public class WaterData {
                 ", pumpOn=" + pumpOn;
     }
 
-    public float getTempValue() {
+    public double getTempValue() {
         return tempValue;
     }
 
@@ -43,7 +43,7 @@ public class WaterData {
         return pumpOn;
     }
 
-    public void setTempValue(float tempValue) {
+    public void setTempValue(double tempValue) {
         this.tempValue = tempValue;
     }
 
