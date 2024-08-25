@@ -11,14 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
 import androidx.core.util.Pair;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
@@ -70,8 +66,8 @@ public class AnalyticsActivity extends AppCompatActivity {
         curr_value.setText(mIntent.getStringExtra("curr_value"));
         header_img.setImageDrawable(getResources().getDrawable(mIntent.getIntExtra("header_img", R.drawable.ec_icon), getApplicationContext().getTheme()));
 
-        from_text.setOnClickListener(view -> DatePickerdialog());
-        to_text.setOnClickListener(view -> DatePickerdialog());
+        from_text.setOnClickListener(view -> DatePickerDialog());
+        to_text.setOnClickListener(view -> DatePickerDialog());
 
         go_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +104,7 @@ public class AnalyticsActivity extends AppCompatActivity {
         });
     }
 
-    private void DatePickerdialog() {
+    private void DatePickerDialog() {
         // Creating a MaterialDatePicker builder for selecting a date range
         MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
         builder.setTitleText("Select a date range");
