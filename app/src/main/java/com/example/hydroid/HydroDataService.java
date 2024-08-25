@@ -23,7 +23,7 @@ import java.util.List;
 
 public class HydroDataService {
 
-    public static final String SERVER_IP = "192.168.1.127";
+    public static final String SERVER_IP = "10.0.0.25";
     public static final String BASE_URL = "http://" + SERVER_IP + ":5000/";
 
     public static final String PH_URL = BASE_URL+ "ph/";
@@ -98,7 +98,7 @@ public class HydroDataService {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            String tempValue = response.getString("tempValue");
+                            String tempValue = response.getString("value");
                             volleyResponseListener.onResp(tempValue);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
@@ -206,13 +206,22 @@ public class HydroDataService {
         void onError(String message);
         void onResp(List<TdsData> tdsData);
     }
+    public interface getWaterHistoryResponse {
+        void onError(String message);
+        void onResp(List<WaterData> waterData);
+    }
     public interface getEnvHistoryResponse {
         void onError(String message);
         void onResp(List<EnvironmentData> environmentDataList);
     }
 
-    public void getPhHistory(getPhHistoryResponse getPhHistoryResponse){
-        String url = PH_URL + "history";
+    public void getPhHistory(getPhHistoryResponse getPhHistoryResponse, long startDate, long endDate){
+        Date startdate = new Date(startDate);
+        Date enddate = new Date(endDate);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        String formattedStartDate = dateFormat.format(startdate);
+        String formattedEndDate = dateFormat.format(enddate);
+        String url = PH_URL + "history?from="+formattedStartDate+"&to="+formattedEndDate;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -228,7 +237,7 @@ public class HydroDataService {
 
                                     PhData phData = new PhData();
                                     phData.setValue(ph.getLong("value"));
-                                    phData.setDate(ph.getLong("date"));
+                                    phData.setDate(Instant.parse(ph.getString("createdAt")).toEpochMilli());
                                     phData.setPhDownOn(ph.getBoolean("phUpOn"));
                                     phData.setPhUpOn(ph.getBoolean("phDownOn"));
 
@@ -301,8 +310,60 @@ public class HydroDataService {
         RequestSingleton.getInstance(context).addToRequestQueue(request);
     }
 
-    public void getEnvHistory(getEnvHistoryResponse getEnvHistoryResponse){
-        String url = ENV_URL + "history";
+    public void getWaterHistory(getWaterHistoryResponse getWaterHistoryResponse, long startDate, long endDate){
+        Date startdate = new Date(startDate);
+        Date enddate = new Date(endDate);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        String formattedStartDate = dateFormat.format(startdate);
+        String formattedEndDate = dateFormat.format(enddate);
+        String url = WATER_URL + "history?from="+formattedStartDate+"&to="+formattedEndDate;
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        List<WaterData> waterDataList = new ArrayList<>();
+                        try {
+                            JSONArray waterDataArray = response.getJSONArray("waterData");
+
+                            for (int i = 0; i < waterDataArray.length(); i++) {
+                                try {
+                                    JSONObject water = waterDataArray.getJSONObject(i);
+
+                                    WaterData waterData = new WaterData();
+                                    waterData.setTempValue(water.getDouble("value"));
+                                    waterData.setDate(Instant.parse(water.getString("createdAt")).toEpochMilli());
+                                    waterData.setPumpOn(water.getBoolean("pumpOn"));
+
+                                    waterDataList.add(waterData);
+
+                                } catch (JSONException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                            getWaterHistoryResponse.onResp(waterDataList);
+
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                getWaterHistoryResponse.onError("didn't work");
+            }
+        });
+
+        RequestSingleton.getInstance(context).addToRequestQueue(request);
+    }
+
+    public void getEnvHistory(getEnvHistoryResponse getEnvHistoryResponse, long startDate, long endDate){
+        Date startdate = new Date(startDate);
+        Date enddate = new Date(endDate);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        String formattedStartDate = dateFormat.format(startdate);
+        String formattedEndDate = dateFormat.format(enddate);
+        String url = ENV_URL + "history?from="+formattedStartDate+"&to="+formattedEndDate;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -322,6 +383,7 @@ public class HydroDataService {
                                     environmentData.setHumidity(env.getLong("humidityValue"));
                                     environmentData.setCo2(env.getLong("co2Value"));
                                     environmentData.setBaro(env.getLong("baroValue"));
+                                    environmentData.setDate(Instant.parse(env.getString("createdAt")).toEpochMilli());
 
                                     environmentDataList.add(environmentData);
 

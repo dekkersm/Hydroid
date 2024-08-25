@@ -8,26 +8,31 @@ public class EnvironmentData {
     private float humidity;
     private float co2;
     private float baro;
+    private long date;
 
     public EnvironmentData() {
     }
 
-    public EnvironmentData(float temperature, float light_intensity, float humidity, float co2, float baro) {
+    public EnvironmentData(float temperature, float light_intensity, float humidity, float co2, float baro, long date) {
         this.temperature = temperature;
         this.light_intensity = light_intensity;
         this.humidity = humidity;
         this.co2 = co2;
         this.baro = baro;
+        this.date = date;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return "temperature=" + temperature +
+        return "EnvironmentData{" +
+                "temperature=" + temperature +
                 ", light_intensity=" + light_intensity +
                 ", humidity=" + humidity +
                 ", co2=" + co2 +
-                ", baro=" + baro;
+                ", baro=" + baro +
+                ", date=" + date +
+                '}';
     }
 
     public float getTemperature() {
@@ -50,6 +55,10 @@ public class EnvironmentData {
         return baro;
     }
 
+    public long getDate() {
+        return date;
+    }
+
     public void setTemperature(float temperature) {
         this.temperature = temperature;
     }
@@ -68,5 +77,9 @@ public class EnvironmentData {
 
     public void setBaro(float baro) {
         this.baro = baro;
+    }
+
+    public void setDate(long date) {
+        this.date = date;
     }
 }

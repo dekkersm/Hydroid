@@ -2,12 +2,17 @@ package com.example.hydroid;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -30,6 +35,9 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home_page);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         CardView ph_btn = findViewById(R.id.ph_btn);
         CardView ec_btn = findViewById(R.id.ec_btn);
@@ -116,24 +124,52 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.ph_btn) {
-            Intent i = new Intent(HomePage.this, HistoricalPhActivity.class);
-            startActivity(i);
+            startAnalytics("pH", ph_value.getText(), R.drawable.ph_icon);
         }
         else if (v.getId() == R.id.ec_btn) {
-            Intent i = new Intent(HomePage.this, HistoricalTdsActivity.class);
-            startActivity(i);
+            startAnalytics("Ec", ec_value.getText(), R.drawable.ec_icon);
         }
         else if (v.getId() == R.id.water_temp_btn) {
+            startAnalytics("Water temp", water_temp_value.getText(), R.drawable.water_temp_icon);
         }
         else if (v.getId() == R.id.temp_btn) {
+            startAnalytics("Temp", temp_value.getText(), R.drawable.air_temp_icon);
         }
         else if (v.getId() == R.id.humidity_btn) {
+            startAnalytics("Humidity", humidity_value.getText(), R.drawable.humidity_icon);
         }
         else if (v.getId() == R.id.light_btn) {
+            startAnalytics("Light", light_value.getText(), R.drawable.light_icon);
         }
         else if (v.getId() == R.id.co2_btn) {
+            startAnalytics("Co2", co2_value.getText(), R.drawable.co2_icon);
         }
         else if (v.getId() == R.id.baro_btn) {
+            startAnalytics("Baro", baro_value.getText(), R.drawable.pressure_icon);
         }
+    }
+
+    private void startAnalytics(String title, CharSequence value, int img){
+        Intent i = new Intent(HomePage.this, AnalyticsActivity.class);
+        i.putExtra("header_title", title);
+        i.putExtra("curr_value", value);
+        i.putExtra("header_img", img);
+        startActivity(i);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.app_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.config)
+        {
+            startActivity(new Intent(getApplicationContext(), ConfigurationActivity.class));
+        }
+        return true;
     }
 }

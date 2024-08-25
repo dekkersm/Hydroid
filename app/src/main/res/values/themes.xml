@@ -1,8 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Hydroid" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:actionMenuTextColor">@color/DarkBlue</item>
+
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/DarkBlue</item>
+        <item name="colorPrimaryVariant">@color/DarkGreen</item>
+        <item name="colorSecondary">@color/teal</item>
+        <item name="colorSecondaryVariant">@color/lightTeal</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Theme.Hydroid" parent="Base.Theme.Hydroid" />
