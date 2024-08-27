@@ -146,7 +146,7 @@ public class HydroDataService {
     public void setCurrConfig(String type, float value){
         String url = CONFIG_URL + type + "?value=" + value +"&pumpTime=" + 1 + "&recheckTimeout=" + 2;
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, null,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PATCH, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -176,11 +176,11 @@ public class HydroDataService {
                     public void onResponse(JSONObject response) {
                         try {
                             EnvironmentData environmentData = new EnvironmentData();
-                            environmentData.setTemperature(response.getLong("tempValue"));
-                            environmentData.setLight_intensity(response.getLong("lightValue"));
-                            environmentData.setHumidity(response.getLong("humidityValue"));
-                            environmentData.setCo2(response.getLong("co2Value"));
-                            environmentData.setBaro(response.getLong("baroValue"));
+                            environmentData.setTemperature(response.getDouble("tempValue"));
+                            environmentData.setLight_intensity(response.getInt("lightValue"));
+                            environmentData.setHumidity(response.getInt("humidityValue"));
+                            environmentData.setCo2(response.getInt("co2Value"));
+                            environmentData.setBaro(response.getInt("baroValue"));
 
                             getEnvResponse.onResp(environmentData);
 
@@ -284,7 +284,7 @@ public class HydroDataService {
                                     JSONObject tds = tdsDataArray.getJSONObject(i);
 
                                     TdsData tdsData = new TdsData();
-                                    tdsData.setValue(tds.getLong("value"));
+                                    tdsData.setValue(tds.getInt("value"));
                                     tdsData.setDate(Instant.parse(tds.getString("createdAt")).toEpochMilli());
                                     tdsData.setPumpOn(tds.getBoolean("pumpOn"));
 
@@ -378,11 +378,11 @@ public class HydroDataService {
                                     JSONObject env = envData.getJSONObject(i);
 
                                     EnvironmentData environmentData = new EnvironmentData();
-                                    environmentData.setTemperature(env.getLong("tempValue"));
-                                    environmentData.setLight_intensity(env.getLong("lightValue"));
-                                    environmentData.setHumidity(env.getLong("humidityValue"));
-                                    environmentData.setCo2(env.getLong("co2Value"));
-                                    environmentData.setBaro(env.getLong("baroValue"));
+                                    environmentData.setTemperature(env.getDouble("tempValue"));
+                                    environmentData.setLight_intensity(env.getInt("lightValue"));
+                                    environmentData.setHumidity(env.getInt("humidityValue"));
+                                    environmentData.setCo2(env.getInt("co2Value"));
+                                    environmentData.setBaro(env.getInt("baroValue"));
                                     environmentData.setDate(Instant.parse(env.getString("createdAt")).toEpochMilli());
 
                                     environmentDataList.add(environmentData);

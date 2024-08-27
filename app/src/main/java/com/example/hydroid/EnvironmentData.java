@@ -3,17 +3,17 @@ package com.example.hydroid;
 import androidx.annotation.NonNull;
 
 public class EnvironmentData {
-    private float temperature;
-    private float light_intensity;
-    private float humidity;
-    private float co2;
-    private float baro;
+    private double temperature;
+    private int light_intensity;
+    private int humidity;
+    private int co2;
+    private int baro;
     private long date;
 
     public EnvironmentData() {
     }
 
-    public EnvironmentData(float temperature, float light_intensity, float humidity, float co2, float baro, long date) {
+    public EnvironmentData(double temperature, int light_intensity, int humidity, int co2, int baro, long date) {
         this.temperature = temperature;
         this.light_intensity = light_intensity;
         this.humidity = humidity;
@@ -35,23 +35,23 @@ public class EnvironmentData {
                 '}';
     }
 
-    public float getTemperature() {
+    public double getTemperature() {
         return temperature;
     }
 
-    public float getLight_intensity() {
+    public int getLight_intensity() {
         return light_intensity;
     }
 
-    public float getHumidity() {
+    public int getHumidity() {
         return humidity;
     }
 
-    public float getCo2() {
+    public int getCo2() {
         return co2;
     }
 
-    public float getBaro() {
+    public int getBaro() {
         return baro;
     }
 
@@ -59,23 +59,23 @@ public class EnvironmentData {
         return date;
     }
 
-    public void setTemperature(float temperature) {
+    public void setTemperature(double temperature) {
         this.temperature = temperature;
     }
 
-    public void setLight_intensity(float light_intensity) {
+    public void setLight_intensity(int light_intensity) {
         this.light_intensity = light_intensity;
     }
 
-    public void setHumidity(float humidity) {
+    public void setHumidity(int humidity) {
         this.humidity = humidity;
     }
 
-    public void setCo2(float co2) {
+    public void setCo2(int co2) {
         this.co2 = co2;
     }
 
-    public void setBaro(float baro) {
+    public void setBaro(int baro) {
         this.baro = baro;
     }
 

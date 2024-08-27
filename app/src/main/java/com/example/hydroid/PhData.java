@@ -3,7 +3,7 @@ package com.example.hydroid;
 import androidx.annotation.NonNull;
 
 public class PhData {
-    private float value;
+    private double value;
     private long date;
     private boolean phUpOn;
     private boolean phDownOn;
@@ -11,7 +11,7 @@ public class PhData {
     public PhData() {
     }
 
-    public PhData(float value, long date, boolean phUpOn, boolean phDownOn) {
+    public PhData(double value, long date, boolean phUpOn, boolean phDownOn) {
         this.value = value;
         this.date = date;
         this.phUpOn = phUpOn;
@@ -27,7 +27,7 @@ public class PhData {
                 ", phDownOn=" + phDownOn;
     }
 
-    public float getValue() {
+    public double getValue() {
         return value;
     }
 
@@ -43,7 +43,7 @@ public class PhData {
         return phDownOn;
     }
 
-    public void setValue(float value) {
+    public void setValue(double value) {
         this.value = value;
     }
 

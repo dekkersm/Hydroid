@@ -19,6 +19,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.List;
+import java.util.Locale;
 
 public class HomePage extends AppCompatActivity implements View.OnClickListener {
     TextView ph_value,
@@ -100,11 +101,11 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
 
             @Override
             public void onResp(EnvironmentData environmentData) {
-                temp_value.setText(Float.toString(environmentData.getTemperature()));
-                humidity_value.setText(Float.toString(environmentData.getHumidity()));
-                light_value.setText(Float.toString(environmentData.getLight_intensity()));
-                co2_value.setText(Float.toString(environmentData.getCo2()));
-                baro_value.setText(Float.toString(environmentData.getBaro()));
+                temp_value.setText(String.format(Locale.getDefault(), "%s", environmentData.getTemperature()));
+                humidity_value.setText(String.format(Locale.getDefault(), "%d", environmentData.getHumidity()));
+                light_value.setText(String.format(Locale.getDefault(), "%d", environmentData.getLight_intensity()));
+                co2_value.setText(String.format(Locale.getDefault(), "%d", environmentData.getCo2()));
+                baro_value.setText(String.format(Locale.getDefault(), "%d", environmentData.getBaro()));
             }
         });
 
