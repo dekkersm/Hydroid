@@ -7,16 +7,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText username, password;
-    Button login_btn;
+    Button login_btn, register_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +22,14 @@ public class MainActivity extends AppCompatActivity {
         username = findViewById(R.id.username_input);
         password = findViewById(R.id.password_input);
         login_btn = findViewById(R.id.login_btn);
+        register_btn = findViewById(R.id.register_btn);
 
         AuthService authService = new AuthService(getApplicationContext());
 
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                authService.loginUser(new AuthService.LoginResponseListener() {
+                authService.loginUser(new AuthService.AuthResponseListener() {
                     @Override
                     public void onError(String message) {
                         Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
@@ -45,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(i);
                     }
                 }, username.getText().toString(), password.getText().toString());
+            }
+        });
+
+        register_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
             }
         });
     }
