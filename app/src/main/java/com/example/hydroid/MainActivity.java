@@ -27,18 +27,24 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.password_input);
         login_btn = findViewById(R.id.login_btn);
 
+        AuthService authService = new AuthService(getApplicationContext());
+
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (username.getText().toString().equals("user") &&
-                password.getText().toString().equals("123")){
-                    Intent i = new Intent(MainActivity.this, HomePage.class);
-                    i.putExtra("username", username.getText().toString());
-                    startActivity(i);
-                }
-                else {
-                    Toast.makeText(MainActivity.this, "login failed", Toast.LENGTH_SHORT).show();
-                }
+                authService.loginUser(new AuthService.LoginResponseListener() {
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResp(String resp) {
+                        Intent i = new Intent(MainActivity.this, HomePage.class);
+                        //i.putExtra("username", username.getText().toString());
+                        startActivity(i);
+                    }
+                }, username.getText().toString(), password.getText().toString());
             }
         });
     }

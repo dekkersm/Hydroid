@@ -64,6 +64,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginHorizontal="20dp"
         android:gravity="center"
+        android:checkedButton="@id/graph_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
@@ -78,7 +79,7 @@
             android:textStyle="bold"
             android:textColor="@color/DarkBlue"
             android:textSize="20sp"
-            android:buttonTint="@color/teal"/>
+            android:id="@+id/graph_btn"/>
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -90,7 +91,7 @@
             android:textStyle="bold"
             android:textColor="@color/DarkBlue"
             android:textSize="20sp"
-            android:buttonTint="@color/teal"/>
+            android:id="@+id/table_btn"/>
     </RadioGroup>
 
     <LinearLayout
@@ -151,11 +152,16 @@
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/idGraphView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/textView"/>
+
+        <ListView
+            android:id="@+id/list_historical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
