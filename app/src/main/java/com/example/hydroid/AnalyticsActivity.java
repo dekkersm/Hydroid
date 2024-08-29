@@ -112,6 +112,7 @@ public class AnalyticsActivity extends AppCompatActivity {
         // Creating a MaterialDatePicker builder for selecting a date range
         MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
         builder.setTitleText("Select a date range");
+        builder.setTheme(R.style.ThemeMaterialCalendar);
 
         // Building the date picker dialog
         MaterialDatePicker<Pair<Long, Long>> datePicker = builder.build();

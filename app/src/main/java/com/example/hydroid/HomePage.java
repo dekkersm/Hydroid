@@ -77,6 +77,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
 
             @Override
             public void onResp(String resp) {
+                resp = resp + "ppm";
                 ec_value.setText(resp);
             }
         });
@@ -89,6 +90,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
 
             @Override
             public void onResp(String resp) {
+                resp = resp + "pH";
                 ph_value.setText(resp);
             }
         });
@@ -101,11 +103,16 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
 
             @Override
             public void onResp(EnvironmentData environmentData) {
-                temp_value.setText(String.format(Locale.getDefault(), "%s", environmentData.getTemperature()));
-                humidity_value.setText(String.format(Locale.getDefault(), "%d", environmentData.getHumidity()));
-                light_value.setText(String.format(Locale.getDefault(), "%d", environmentData.getLight_intensity()));
-                co2_value.setText(String.format(Locale.getDefault(), "%d", environmentData.getCo2()));
-                baro_value.setText(String.format(Locale.getDefault(), "%d", environmentData.getBaro()));
+                String temp = String.format(Locale.getDefault(), "%s", environmentData.getTemperature()) + "℃";
+                String humidity = environmentData.getHumidity() + "%";
+                String light = environmentData.getLight_intensity() + "lux";
+                String co2 = environmentData.getCo2() + "ppm";
+                String baro = environmentData.getBaro() + "mbar";
+                temp_value.setText(temp);
+                humidity_value.setText(humidity);
+                light_value.setText(light);
+                co2_value.setText(co2);
+                baro_value.setText(baro);
             }
         });
 
@@ -117,6 +124,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
 
             @Override
             public void onResp(String resp) {
+                resp = resp + "℃";
                 water_temp_value.setText(resp);
             }
         });

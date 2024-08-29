@@ -15,4 +15,7 @@
     </style>
 
     <style name="Theme.Hydroid" parent="Base.Theme.Hydroid" />
+    <style name="ThemeMaterialCalendar" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="android:windowFullscreen">false</item>
+    </style>
 </resources>
