@@ -14,7 +14,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Configure"
+        android:text="@string/configure"
         android:textColor="@color/teal"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -42,6 +42,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
+            android:contentDescription="@string/ph_icon"
             android:src="@drawable/ph_icon" />
 
         <TextView
@@ -49,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_gravity="center_vertical"
-            android:text="pH"
+            android:text="@string/ph"
             android:textColor="@color/DarkBlue"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -64,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
-                android:text="Min Value:"
+                android:text="@string/min_value"
                 android:textColor="@color/DarkBlue"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -74,9 +75,10 @@
                 android:layout_width="203dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:autofillHints="minimum value"
                 android:background="@drawable/rounded_corner"
                 android:backgroundTint="@color/white"
-                android:hint="Min Value"
+                android:hint="@string/min_value"
                 android:inputType="numberDecimal"
                 android:padding="5dp"
                 android:paddingHorizontal="10dp"
@@ -87,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
-                android:text="Max Value:"
+                android:text="@string/max_value"
                 android:textColor="@color/DarkBlue"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -100,7 +102,7 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/rounded_corner"
                 android:backgroundTint="@color/white"
-                android:hint="Max Value"
+                android:hint="@string/max_value"
                 android:inputType="numberDecimal"
                 android:padding="5dp"
                 android:paddingHorizontal="10dp" />
@@ -111,7 +113,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=">"
+            android:text="@string/arrow"
             android:textSize="30sp"
             android:textColor="@color/DarkBlue"
             android:textStyle="bold"
@@ -142,7 +144,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Ec"
+            android:text="@string/ec"
             android:textColor="@color/DarkBlue"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -154,7 +156,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/rounded_corner"
             android:backgroundTint="@color/white"
-            android:hint="Min Value"
+            android:hint="@string/min_value"
             android:inputType="numberDecimal"
             android:padding="5dp"
             android:paddingHorizontal="10dp"/>
@@ -162,7 +164,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=">"
+            android:text="@string/arrow"
             android:textSize="30sp"
             android:textColor="@color/DarkBlue"
             android:textStyle="bold"

@@ -18,7 +18,6 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:contentDescription="new post image"
             android:scaleType="centerCrop"
             android:visibility="visible"
             android:src="@drawable/logo"/>
@@ -30,7 +29,7 @@
             android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hydroid"/>
+            android:text="@string/hydroid"/>
     </LinearLayout>
 
 </androidx.appcompat.widget.Toolbar>

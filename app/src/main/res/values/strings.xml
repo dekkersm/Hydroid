@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">Hydroid</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="go"><![CDATA[GO >]]></string>
+    <string name="or">|</string>
+    <string name="header_icon">Header icon</string>
+    <string name="ph">pH</string>
+    <string name="min_value">Min Value:</string>
+    <string name="max_value">Max Value:</string>
+    <string name="arrow"><![CDATA[>]]></string>
+    <string name="ec">Ec</string>
+    <string name="configure">Configure</string>
+    <string name="ph_icon">pH icon</string>
+    <string name="water_temp">water temp</string>
+    <string name="air_temp">Air temp</string>
+    <string name="humidity">humidity</string>
+    <string name="light">light</string>
+    <string name="co2">Co2</string>
+    <string name="baro">Baro</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">login</string>
+    <string name="not_yet_registered_n_sign_up_now">Not yet registered?\n Sign up now</string>
+    <string name="sign_up_to_your_farm_today">Sign up to your farm today!</string>
+    <string name="full_name">Full name</string>
+    <string name="email">Email</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="hydroid">Hydroid</string>
 </resources>

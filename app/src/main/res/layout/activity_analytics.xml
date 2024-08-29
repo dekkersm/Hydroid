@@ -25,13 +25,13 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginHorizontal="10dp"
+            android:contentDescription="@string/header_icon"
             android:src="@drawable/light_icon"/>
         <TextView
             android:id="@+id/header_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Ec"
             android:textColor="@color/teal"
             android:textSize="30sp"
             android:textStyle="bold"/>
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="18dp"
-            android:text="|"
+            android:text="@string/or"
             android:textColor="@color/teal"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -48,65 +48,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="18dp"
-            android:text="50"
             android:textColor="@color/teal"
             android:textSize="30sp"
             android:textStyle="bold"/>
     </LinearLayout>
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corner"
-        android:backgroundTint="@color/lightTeal"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp"
-        android:layout_marginHorizontal="20dp"
-        android:gravity="center"
-        android:checkedButton="@id/graph_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginHorizontal="20sp"
-            android:button="@null"
-            android:text="Graph"
-            android:textStyle="bold"
-            android:textColor="@color/DarkBlue"
-            android:textSize="20sp"
-            android:id="@+id/graph_btn"/>
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginHorizontal="20sp"
-            android:button="@null"
-            android:text="Table"
-            android:textStyle="bold"
-            android:textColor="@color/DarkBlue"
-            android:textSize="20sp"
-            android:id="@+id/table_btn"/>
-    </RadioGroup>
-
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corner"
-        android:backgroundTint="@color/lightTeal"
-        android:orientation="horizontal"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="20dp"
+        android:background="@drawable/rounded_corner"
+        android:backgroundTint="@color/lightTeal"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <TextView
             android:id="@+id/from_text"
@@ -114,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:background="@color/white"
-            android:text="From"
+            android:text="@string/from"
             android:textSize="20sp" />
 
         <TextView
@@ -122,7 +81,7 @@
             android:layout_width="102dp"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:text="To"
+            android:text="@string/to"
             android:textSize="20sp" />
 
         <Button
@@ -130,20 +89,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:text="GO >"
+            android:text="@string/go"
             android:textColor="@color/DarkBlue"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="336dp"
+        android:layout_height="440dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/lightTeal"
-        android:padding="18dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="17dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -157,11 +115,6 @@
             android:layout_margin="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"/>
-
-        <ListView
-            android:id="@+id/list_historical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,12 +40,10 @@ public class AnalyticsActivity extends AppCompatActivity {
     TextView from_text, to_text;
     ImageView header_img;
     Button go_btn;
-    ListView lv_history;
 
     Long startDate = 1724371200000L, endDate = 1724371200000L;
 
     HydroDataService dataService;
-    Boolean isGraph = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +63,6 @@ public class AnalyticsActivity extends AppCompatActivity {
         to_text = findViewById(R.id.to_text);
         header_img = findViewById(R.id.header_img);
         go_btn = findViewById(R.id.go_btn);
-        lv_history = findViewById(R.id.list_historical);
-        RadioGroup radioGroup = findViewById(R.id.radioGroup);
 
 
         Intent mIntent = getIntent();
@@ -76,22 +72,6 @@ public class AnalyticsActivity extends AppCompatActivity {
 
         from_text.setOnClickListener(view -> DatePickerDialog());
         to_text.setOnClickListener(view -> DatePickerDialog());
-
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.graph_btn)
-                {
-                    isGraph = true;
-                    lv_history.setVisibility(View.INVISIBLE);
-                    graphView.setVisibility(View.VISIBLE);
-                } else if (checkedId == R.id.table_btn) {
-                    isGraph = false;
-                    lv_history.setVisibility(View.VISIBLE);
-                    graphView.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
 
         go_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,14 +150,7 @@ public class AnalyticsActivity extends AppCompatActivity {
                     Date date = new Date(PhData.get(i).getDate());
                     points[i] = new DataPoint(date, (double) PhData.get(i).getValue());
                 }
-
-                if (isGraph) {
-                    drawGraph(points);
-                }
-                else {
-                    setTable(points);
-                }
-
+                drawGraph(points);
             }
         }, startDate, endDate);
     }
@@ -197,13 +170,7 @@ public class AnalyticsActivity extends AppCompatActivity {
                     Date date = new Date(tdsData.get(i).getDate());
                     points[i] = new DataPoint(date, (double) tdsData.get(i).getValue());
                 }
-
-                if (isGraph) {
-                    drawGraph(points);
-                }
-                else {
-                    setTable(points);
-                }
+                drawGraph(points);
             }
         }, startDate, endDate);
     }
@@ -223,14 +190,7 @@ public class AnalyticsActivity extends AppCompatActivity {
                     Date date = new Date(waterData.get(i).getDate());
                     points[i] = new DataPoint(date, waterData.get(i).getTempValue());
                 }
-
-                if (isGraph) {
-                    drawGraph(points);
-                }
-                else {
-                    setTable(points);
-                }
-
+                drawGraph(points);
             }
         }, startDate, endDate);
     }
@@ -267,39 +227,29 @@ public class AnalyticsActivity extends AppCompatActivity {
                             break;
                     }
                 }
-
-                if (isGraph) {
-                    drawGraph(points);
-                }
-                else {
-                    setTable(points);
-                }
+                drawGraph(points);
             }
         }, startDate, endDate);
     }
 
     private void drawGraph(DataPoint[] points){
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(points);
-        series.setColor(R.color.DarkBlue);
-        series.setAnimated(true);
-        series.setDrawDataPoints(true);
         graphView.removeAllSeries();
         graphView.addSeries(series);
         graphView.getViewport().setXAxisBoundsManual(true);
         graphView.getViewport().setMinX(points[0].getX());
         graphView.getViewport().setMaxX(points[points.length-1].getX());
+        graphView.getGridLabelRenderer().setHorizontalLabelsAngle(45);
+        graphView.getGridLabelRenderer().setLabelsSpace(35);
         graphView.getGridLabelRenderer().setGridStyle( GridLabelRenderer.GridStyle.HORIZONTAL );
         graphView.getGridLabelRenderer().setLabelFormatter(
                 new DateAsXAxisLabelFormatter(AnalyticsActivity.this,
                         new SimpleDateFormat("dd.MM", Locale.getDefault())));
-    }
 
-    private void setTable(DataPoint[] points)
-    {
-        ArrayAdapter arrayAdapter = new ArrayAdapter(AnalyticsActivity.this, android.R.layout.simple_list_item_1, points);
-        lv_history.setAdapter(arrayAdapter);
+        series.setColor(R.color.DarkBlue);
+        series.setAnimated(true);
+        series.setDrawDataPoints(true);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
