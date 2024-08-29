@@ -2,7 +2,6 @@ package com.example.hydroid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -29,26 +28,21 @@ public class RegisterActivity extends AppCompatActivity {
 
         AuthService authService = new AuthService(getApplicationContext());
 
-        signup_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                authService.registerUser(new AuthService.AuthResponseListener() {
-                                             @Override
-                                             public void onError(String message) {
-                                                 Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
-                                             }
+        signup_btn.setOnClickListener(v -> authService.registerUser(new AuthService.AuthResponseListener() {
+                                                                        @Override
+                                                                        public void onError(String message) {
+                                                                            Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
+                                                                        }
 
-                                             @Override
-                                             public void onResp(String resp) {
-                                                 Toast.makeText(RegisterActivity.this, "Sign up successful!", Toast.LENGTH_SHORT).show();
-                                                 startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-                                             }
-                                         },
-                        name.getText().toString(),
-                        username.getText().toString(),
-                        email.getText().toString(),
-                        password.getText().toString());
-            }
-        });
+                                                                        @Override
+                                                                        public void onResp(String resp) {
+                                                                            Toast.makeText(RegisterActivity.this, "Sign up successful!", Toast.LENGTH_SHORT).show();
+                                                                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                                                        }
+                                                                    },
+                name.getText().toString(),
+                username.getText().toString(),
+                email.getText().toString(),
+                password.getText().toString()));
     }
 }

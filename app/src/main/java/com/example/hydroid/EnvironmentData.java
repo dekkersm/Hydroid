@@ -1,7 +1,5 @@
 package com.example.hydroid;
 
-import androidx.annotation.NonNull;
-
 public class EnvironmentData {
     private double temperature;
     private int light_intensity;
@@ -11,28 +9,6 @@ public class EnvironmentData {
     private long date;
 
     public EnvironmentData() {
-    }
-
-    public EnvironmentData(double temperature, int light_intensity, int humidity, int co2, int baro, long date) {
-        this.temperature = temperature;
-        this.light_intensity = light_intensity;
-        this.humidity = humidity;
-        this.co2 = co2;
-        this.baro = baro;
-        this.date = date;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "EnvironmentData{" +
-                "temperature=" + temperature +
-                ", light_intensity=" + light_intensity +
-                ", humidity=" + humidity +
-                ", co2=" + co2 +
-                ", baro=" + baro +
-                ", date=" + date +
-                '}';
     }
 
     public double getTemperature() {

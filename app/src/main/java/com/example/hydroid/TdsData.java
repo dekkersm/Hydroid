@@ -8,12 +8,6 @@ public class TdsData {
     public TdsData() {
     }
 
-    public TdsData(int value, long date, boolean pumpOn) {
-        this.value = value;
-        this.date = date;
-        this.pumpOn = pumpOn;
-    }
-
     public int getValue() {
         return value;
     }

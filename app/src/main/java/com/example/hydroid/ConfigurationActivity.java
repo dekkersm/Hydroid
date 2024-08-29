@@ -1,7 +1,6 @@
 package com.example.hydroid;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,34 +54,28 @@ public class ConfigurationActivity extends AppCompatActivity {
             }
         });
 
-        ec_v_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!ec_config.getText().toString().isEmpty())
-                {
-                    dataService.setCurrConfig("tdsMinLimit", Float.parseFloat(ec_config.getText().toString()));
-                    Toast.makeText(ConfigurationActivity.this, "ec configuration successful!", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(ConfigurationActivity.this, "configuration failed!", Toast.LENGTH_SHORT).show();
-                }
+        ec_v_btn.setOnClickListener(v -> {
+            if (!ec_config.getText().toString().isEmpty())
+            {
+                dataService.setCurrConfig("tdsMinLimit", Float.parseFloat(ec_config.getText().toString()));
+                Toast.makeText(ConfigurationActivity.this, "ec configuration successful!", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(ConfigurationActivity.this, "configuration failed!", Toast.LENGTH_SHORT).show();
             }
         });
 
-        ph_v_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!ph_max_config.getText().toString().isEmpty() && !ph_min_config.getText().toString().isEmpty())
-                {
-                    dataService.setCurrConfig("phMinLimit", Float.parseFloat(ph_min_config.getText().toString()));
-                    dataService.setCurrConfig("phMaxLimit", Float.parseFloat(ph_max_config.getText().toString()));
-                    Toast.makeText(ConfigurationActivity.this, "ph configuration successful!", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(ConfigurationActivity.this, "configuration failed!", Toast.LENGTH_SHORT).show();
-                }
+        ph_v_btn.setOnClickListener(v -> {
+            if (!ph_max_config.getText().toString().isEmpty() && !ph_min_config.getText().toString().isEmpty())
+            {
+                dataService.setCurrConfig("phMinLimit", Float.parseFloat(ph_min_config.getText().toString()));
+                dataService.setCurrConfig("phMaxLimit", Float.parseFloat(ph_max_config.getText().toString()));
+                Toast.makeText(ConfigurationActivity.this, "ph configuration successful!", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(ConfigurationActivity.this, "configuration failed!", Toast.LENGTH_SHORT).show();
             }
         });
     }

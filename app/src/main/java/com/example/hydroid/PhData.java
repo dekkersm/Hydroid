@@ -9,13 +9,6 @@ public class PhData {
     public PhData() {
     }
 
-    public PhData(double value, long date, boolean phUpOn, boolean phDownOn) {
-        this.value = value;
-        this.date = date;
-        this.phUpOn = phUpOn;
-        this.phDownOn = phDownOn;
-    }
-
     public double getValue() {
         return value;
     }

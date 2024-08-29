@@ -2,7 +2,6 @@ package com.example.hydroid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,30 +25,19 @@ public class MainActivity extends AppCompatActivity {
 
         AuthService authService = new AuthService(getApplicationContext());
 
-        login_btn.setOnClickListener(new View.OnClickListener() {
+        login_btn.setOnClickListener(v -> authService.loginUser(new AuthService.AuthResponseListener() {
             @Override
-            public void onClick(View v) {
-                authService.loginUser(new AuthService.AuthResponseListener() {
-                    @Override
-                    public void onError(String message) {
-                        Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onResp(String resp) {
-                        Intent i = new Intent(MainActivity.this, HomePage.class);
-                        //i.putExtra("username", username.getText().toString());
-                        startActivity(i);
-                    }
-                }, username.getText().toString(), password.getText().toString());
+            public void onError(String message) {
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
             }
-        });
 
-        register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+            public void onResp(String resp) {
+                Intent i = new Intent(MainActivity.this, HomePage.class);
+                startActivity(i);
             }
-        });
+        }, username.getText().toString(), password.getText().toString()));
+
+        register_btn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, RegisterActivity.class)));
     }
 }

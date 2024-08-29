@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -69,37 +68,34 @@ public class AnalyticsActivity extends AppCompatActivity {
         from_text.setOnClickListener(view -> DatePickerDialog());
         to_text.setOnClickListener(view -> DatePickerDialog());
 
-        go_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (header_title.getText().toString())
-                {
-                    case "pH":
-                        phClickListener();
-                        break;
-                    case "Ec":
-                        tdsClickListener();
-                        break;
-                    case "Water temp":
-                        waterClickListener();
-                        break;
-                    case "Temp":
-                        envClickListener("Temp");
-                        break;
-                    case "Humidity":
-                        envClickListener("Humidity");
-                        break;
-                    case "Light":
-                        envClickListener("Light");
-                        break;
-                    case "Co2":
-                        envClickListener("Co2");
-                        break;
-                    case "Baro":
-                        envClickListener("Baro");
-                        break;
-                    default: break;
-                }
+        go_btn.setOnClickListener(v -> {
+            switch (header_title.getText().toString())
+            {
+                case "pH":
+                    phClickListener();
+                    break;
+                case "Ec":
+                    tdsClickListener();
+                    break;
+                case "Water temp":
+                    waterClickListener();
+                    break;
+                case "Temp":
+                    envClickListener("Temp");
+                    break;
+                case "Humidity":
+                    envClickListener("Humidity");
+                    break;
+                case "Light":
+                    envClickListener("Light");
+                    break;
+                case "Co2":
+                    envClickListener("Co2");
+                    break;
+                case "Baro":
+                    envClickListener("Baro");
+                    break;
+                default: break;
             }
         });
     }
@@ -145,7 +141,7 @@ public class AnalyticsActivity extends AppCompatActivity {
                 DataPoint[] points = new DataPoint[PhData.size()];
                 for (int i = 0; i < PhData.size(); i++) {
                     Date date = new Date(PhData.get(i).getDate());
-                    points[i] = new DataPoint(date, (double) PhData.get(i).getValue());
+                    points[i] = new DataPoint(date, PhData.get(i).getValue());
                 }
                 drawGraph(points);
             }
@@ -165,7 +161,7 @@ public class AnalyticsActivity extends AppCompatActivity {
                 DataPoint[] points = new DataPoint[tdsData.size()];
                 for (int i = 0; i < tdsData.size(); i++) {
                     Date date = new Date(tdsData.get(i).getDate());
-                    points[i] = new DataPoint(date, (double) tdsData.get(i).getValue());
+                    points[i] = new DataPoint(date, tdsData.get(i).getValue());
                 }
                 drawGraph(points);
             }
@@ -230,7 +226,7 @@ public class AnalyticsActivity extends AppCompatActivity {
     }
 
     private void drawGraph(DataPoint[] points){
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(points);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(points);
         graphView.removeAllSeries();
         graphView.addSeries(series);
         graphView.getViewport().setXAxisBoundsManual(true);

@@ -1,7 +1,5 @@
 package com.example.hydroid;
 
-import androidx.annotation.NonNull;
-
 public class WaterData {
     private double tempValue;
     private long date;
@@ -10,23 +8,6 @@ public class WaterData {
 
     public WaterData() {
     }
-
-    public WaterData(boolean pumpOn, boolean fillOn, long date, double tempValue) {
-        this.pumpOn = pumpOn;
-        this.fillOn = fillOn;
-        this.date = date;
-        this.tempValue = tempValue;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "tempValue=" + tempValue +
-                ", date=" + date +
-                ", fillOn=" + fillOn +
-                ", pumpOn=" + pumpOn;
-    }
-
     public double getTempValue() {
         return tempValue;
     }

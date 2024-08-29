@@ -43,22 +43,14 @@ public class HydroDataService {
         String url = PH_URL + "current";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String pHValue = response.getString("value");
-                            volleyResponseListener.onResp(pHValue);
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
+                response -> {
+                    try {
+                        String pHValue = response.getString("value");
+                        volleyResponseListener.onResp(pHValue);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                volleyResponseListener.onError("didn't work");
-            }
-        });
+                }, error -> volleyResponseListener.onError("didn't work"));
 
         RequestSingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
@@ -67,22 +59,14 @@ public class HydroDataService {
         String url = TDS_URL + "current";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String tdsValue = response.getString("value");
-                            volleyResponseListener.onResp(tdsValue);
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
+                response -> {
+                    try {
+                        String tdsValue = response.getString("value");
+                        volleyResponseListener.onResp(tdsValue);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                volleyResponseListener.onError("didn't work");
-            }
-        });
+                }, error -> volleyResponseListener.onError("didn't work"));
 
         RequestSingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
@@ -91,22 +75,14 @@ public class HydroDataService {
         String url = WATER_URL + "current";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String tempValue = response.getString("value");
-                            volleyResponseListener.onResp(tempValue);
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
+                response -> {
+                    try {
+                        String tempValue = response.getString("value");
+                        volleyResponseListener.onResp(tempValue);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                volleyResponseListener.onError("didn't work");
-            }
-        });
+                }, error -> volleyResponseListener.onError("didn't work"));
 
         RequestSingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
@@ -120,22 +96,14 @@ public class HydroDataService {
         String url = CONFIG_URL + "current";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray tempValue = response.getJSONArray("confData");
-                            getCurrConfigResp.onResp(tempValue);
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
+                response -> {
+                    try {
+                        JSONArray tempValue = response.getJSONArray("confData");
+                        getCurrConfigResp.onResp(tempValue);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                getCurrConfigResp.onError("didn't work");
-            }
-        });
+                }, error -> getCurrConfigResp.onError("didn't work"));
 
         RequestSingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
@@ -144,17 +112,11 @@ public class HydroDataService {
         String url = CONFIG_URL + type + "?value=" + value +"&pumpTime=" + 1 + "&recheckTimeout=" + 2;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PATCH, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
+                response -> {
 
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+                }, error -> {
 
-            }
-        });
+                });
 
         RequestSingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
@@ -168,29 +130,21 @@ public class HydroDataService {
         String url = ENV_URL + "current";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            EnvironmentData environmentData = new EnvironmentData();
-                            environmentData.setTemperature(response.getDouble("tempValue"));
-                            environmentData.setLight_intensity(response.getInt("lightValue"));
-                            environmentData.setHumidity(response.getInt("humidityValue"));
-                            environmentData.setCo2(response.getInt("co2Value"));
-                            environmentData.setBaro(response.getInt("baroValue"));
+                response -> {
+                    try {
+                        EnvironmentData environmentData = new EnvironmentData();
+                        environmentData.setTemperature(response.getDouble("tempValue"));
+                        environmentData.setLight_intensity(response.getInt("lightValue"));
+                        environmentData.setHumidity(response.getInt("humidityValue"));
+                        environmentData.setCo2(response.getInt("co2Value"));
+                        environmentData.setBaro(response.getInt("baroValue"));
 
-                            getEnvResponse.onResp(environmentData);
+                        getEnvResponse.onResp(environmentData);
 
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                getEnvResponse.onError("didn't work");
-            }
-        });
+                }, error -> getEnvResponse.onError("didn't work"));
 
         RequestSingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
@@ -221,41 +175,33 @@ public class HydroDataService {
         String url = PH_URL + "history?from="+formattedStartDate+"&to="+formattedEndDate;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        List<PhData> phDataArrayList = new ArrayList<>();
-                        try {
-                            JSONArray phDataList = response.getJSONArray("phData");
+                response -> {
+                    List<PhData> phDataArrayList = new ArrayList<>();
+                    try {
+                        JSONArray phDataList = response.getJSONArray("phData");
 
-                            for (int i = 0; i < phDataList.length(); i++) {
-                                try {
-                                    JSONObject ph = phDataList.getJSONObject(i);
+                        for (int i = 0; i < phDataList.length(); i++) {
+                            try {
+                                JSONObject ph = phDataList.getJSONObject(i);
 
-                                    PhData phData = new PhData();
-                                    phData.setValue(ph.getLong("value"));
-                                    phData.setDate(Instant.parse(ph.getString("createdAt")).toEpochMilli());
-                                    phData.setPhDownOn(ph.getBoolean("phUpOn"));
-                                    phData.setPhUpOn(ph.getBoolean("phDownOn"));
+                                PhData phData = new PhData();
+                                phData.setValue(ph.getLong("value"));
+                                phData.setDate(Instant.parse(ph.getString("createdAt")).toEpochMilli());
+                                phData.setPhDownOn(ph.getBoolean("phUpOn"));
+                                phData.setPhUpOn(ph.getBoolean("phDownOn"));
 
-                                    phDataArrayList.add(phData);
+                                phDataArrayList.add(phData);
 
-                                } catch (JSONException e) {
-                                    throw new RuntimeException(e);
-                                }
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
                             }
-                            getPhHistoryResponse.onResp(phDataArrayList);
-
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
                         }
+                        getPhHistoryResponse.onResp(phDataArrayList);
+
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                getPhHistoryResponse.onError("didn't work");
-            }
-        });
+                }, error -> getPhHistoryResponse.onError("didn't work"));
 
         RequestSingleton.getInstance(context).addToRequestQueue(request);
     }
@@ -269,40 +215,32 @@ public class HydroDataService {
         String url = TDS_URL + "history?from="+formattedStartDate+"&to="+formattedEndDate;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        List<TdsData> tdsDataList = new ArrayList<>();
-                        try {
-                            JSONArray tdsDataArray = response.getJSONArray("tdsData");
+                response -> {
+                    List<TdsData> tdsDataList = new ArrayList<>();
+                    try {
+                        JSONArray tdsDataArray = response.getJSONArray("tdsData");
 
-                            for (int i = 0; i < tdsDataArray.length(); i++) {
-                                try {
-                                    JSONObject tds = tdsDataArray.getJSONObject(i);
+                        for (int i = 0; i < tdsDataArray.length(); i++) {
+                            try {
+                                JSONObject tds = tdsDataArray.getJSONObject(i);
 
-                                    TdsData tdsData = new TdsData();
-                                    tdsData.setValue(tds.getInt("value"));
-                                    tdsData.setDate(Instant.parse(tds.getString("createdAt")).toEpochMilli());
-                                    tdsData.setPumpOn(tds.getBoolean("pumpOn"));
+                                TdsData tdsData = new TdsData();
+                                tdsData.setValue(tds.getInt("value"));
+                                tdsData.setDate(Instant.parse(tds.getString("createdAt")).toEpochMilli());
+                                tdsData.setPumpOn(tds.getBoolean("pumpOn"));
 
-                                    tdsDataList.add(tdsData);
+                                tdsDataList.add(tdsData);
 
-                                } catch (JSONException e) {
-                                    throw new RuntimeException(e);
-                                }
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
                             }
-                            getTdsHistoryResponse.onResp(tdsDataList);
-
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
                         }
+                        getTdsHistoryResponse.onResp(tdsDataList);
+
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                getTdsHistoryResponse.onError("didn't work");
-            }
-        });
+                }, error -> getTdsHistoryResponse.onError("didn't work"));
 
         RequestSingleton.getInstance(context).addToRequestQueue(request);
     }
@@ -316,40 +254,32 @@ public class HydroDataService {
         String url = WATER_URL + "history?from="+formattedStartDate+"&to="+formattedEndDate;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        List<WaterData> waterDataList = new ArrayList<>();
-                        try {
-                            JSONArray waterDataArray = response.getJSONArray("waterData");
+                response -> {
+                    List<WaterData> waterDataList = new ArrayList<>();
+                    try {
+                        JSONArray waterDataArray = response.getJSONArray("waterData");
 
-                            for (int i = 0; i < waterDataArray.length(); i++) {
-                                try {
-                                    JSONObject water = waterDataArray.getJSONObject(i);
+                        for (int i = 0; i < waterDataArray.length(); i++) {
+                            try {
+                                JSONObject water = waterDataArray.getJSONObject(i);
 
-                                    WaterData waterData = new WaterData();
-                                    waterData.setTempValue(water.getDouble("value"));
-                                    waterData.setDate(Instant.parse(water.getString("createdAt")).toEpochMilli());
-                                    waterData.setPumpOn(water.getBoolean("pumpOn"));
+                                WaterData waterData = new WaterData();
+                                waterData.setTempValue(water.getDouble("value"));
+                                waterData.setDate(Instant.parse(water.getString("createdAt")).toEpochMilli());
+                                waterData.setPumpOn(water.getBoolean("pumpOn"));
 
-                                    waterDataList.add(waterData);
+                                waterDataList.add(waterData);
 
-                                } catch (JSONException e) {
-                                    throw new RuntimeException(e);
-                                }
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
                             }
-                            getWaterHistoryResponse.onResp(waterDataList);
-
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
                         }
+                        getWaterHistoryResponse.onResp(waterDataList);
+
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                getWaterHistoryResponse.onError("didn't work");
-            }
-        });
+                }, error -> getWaterHistoryResponse.onError("didn't work"));
 
         RequestSingleton.getInstance(context).addToRequestQueue(request);
     }
@@ -363,43 +293,35 @@ public class HydroDataService {
         String url = ENV_URL + "history?from="+formattedStartDate+"&to="+formattedEndDate;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        List<EnvironmentData> environmentDataList = new ArrayList<>();
-                        try {
-                            JSONArray envData = response.getJSONArray("envData");
+                response -> {
+                    List<EnvironmentData> environmentDataList = new ArrayList<>();
+                    try {
+                        JSONArray envData = response.getJSONArray("envData");
 
-                            for (int i = 0; i < envData.length(); i++) {
-                                try {
-                                    JSONObject env = envData.getJSONObject(i);
+                        for (int i = 0; i < envData.length(); i++) {
+                            try {
+                                JSONObject env = envData.getJSONObject(i);
 
-                                    EnvironmentData environmentData = new EnvironmentData();
-                                    environmentData.setTemperature(env.getDouble("tempValue"));
-                                    environmentData.setLight_intensity(env.getInt("lightValue"));
-                                    environmentData.setHumidity(env.getInt("humidityValue"));
-                                    environmentData.setCo2(env.getInt("co2Value"));
-                                    environmentData.setBaro(env.getInt("baroValue"));
-                                    environmentData.setDate(Instant.parse(env.getString("createdAt")).toEpochMilli());
+                                EnvironmentData environmentData = new EnvironmentData();
+                                environmentData.setTemperature(env.getDouble("tempValue"));
+                                environmentData.setLight_intensity(env.getInt("lightValue"));
+                                environmentData.setHumidity(env.getInt("humidityValue"));
+                                environmentData.setCo2(env.getInt("co2Value"));
+                                environmentData.setBaro(env.getInt("baroValue"));
+                                environmentData.setDate(Instant.parse(env.getString("createdAt")).toEpochMilli());
 
-                                    environmentDataList.add(environmentData);
+                                environmentDataList.add(environmentData);
 
-                                } catch (JSONException e) {
-                                    throw new RuntimeException(e);
-                                }
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
                             }
-                            getEnvHistoryResponse.onResp(environmentDataList);
-
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
                         }
+                        getEnvHistoryResponse.onResp(environmentDataList);
+
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                getEnvHistoryResponse.onError("didn't work");
-            }
-        });
+                }, error -> getEnvHistoryResponse.onError("didn't work"));
 
         RequestSingleton.getInstance(context).addToRequestQueue(request);
     }

@@ -13,7 +13,7 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 public class AuthService {
     public static final String LOGIN_URL = BASE_URL + "auth/login";
@@ -59,11 +59,7 @@ public class AuthService {
 
             @Override
             public byte[] getBody() throws AuthFailureError {
-                try {
-                    return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
-                } catch (UnsupportedEncodingException uee) {
-                    throw new RuntimeException(uee);
-                }
+                return mRequestBody.getBytes(StandardCharsets.UTF_8);
             }
         };
 
@@ -102,11 +98,7 @@ public class AuthService {
 
             @Override
             public byte[] getBody() throws AuthFailureError {
-                try {
-                    return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
-                } catch (UnsupportedEncodingException uee) {
-                    throw new RuntimeException(uee);
-                }
+                return mRequestBody.getBytes(StandardCharsets.UTF_8);
             }
         };
 
