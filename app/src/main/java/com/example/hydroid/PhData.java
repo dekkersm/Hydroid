@@ -1,7 +1,5 @@
 package com.example.hydroid;
 
-import androidx.annotation.NonNull;
-
 public class PhData {
     private double value;
     private long date;
@@ -16,15 +14,6 @@ public class PhData {
         this.date = date;
         this.phUpOn = phUpOn;
         this.phDownOn = phDownOn;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "value=" + value +
-                ", date=" + DateUtils.getReadableDateFromLong((long) date) +
-                ", phUpOn=" + phUpOn +
-                ", phDownOn=" + phDownOn;
     }
 
     public double getValue() {

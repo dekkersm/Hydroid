@@ -1,7 +1,5 @@
 package com.example.hydroid;
 
-import androidx.annotation.NonNull;
-
 public class TdsData {
     private int value;
     private long date;
@@ -14,14 +12,6 @@ public class TdsData {
         this.value = value;
         this.date = date;
         this.pumpOn = pumpOn;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "value=" + value +
-                ", date=" + DateUtils.getReadableDateFromLong((long) date) +
-                ", pumpOn=" + pumpOn;
     }
 
     public int getValue() {
