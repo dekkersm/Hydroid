@@ -6,6 +6,7 @@ go to https://nodejs.org/en/download/prebuilt-installer and follow the steps for
 go to https://developer.android.com/studio and press download android studio
 run the wizard file to start the download.
 open android studio and choose open new project -> hydroid
+go to tab device manager in the right hand menu -> click the + -> create virtual device and choose any device you want.
 
 start the server:
 go to the HydroidServer directory and run the following commands:
@@ -16,4 +17,4 @@ go to file ..Hydroid\app\src\main\java\com\example\hydroid\Constants.java and ch
 
 
 build the app by pressing the build icon in the top right corner of the android studio.
-run the app using the desired device in the running devides tab of android studio by pressing the green run button.
+run the app using the desired device and pressing the green run button.
