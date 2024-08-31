@@ -1,10 +1,9 @@
 package com.example.hydroid;
+import static com.example.hydroid.Constants.SERVER_IP;
 
 import android.content.Context;
 
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
@@ -19,8 +18,6 @@ import java.util.Date;
 import java.util.List;
 
 public class HydroDataService {
-
-    public static final String SERVER_IP = "10.0.0.25";
     public static final String BASE_URL = "http://" + SERVER_IP + ":5000/";
 
     public static final String PH_URL = BASE_URL+ "ph/";
